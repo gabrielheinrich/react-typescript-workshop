@@ -266,3 +266,25 @@ export const BookListItem = ({ book }: BookListItemProps) => {
 - Since the `BookListItem` component belongs to the `BookList` move its directory into the `BookList` directory and adjust the imports
 - Display the minimum and maximum number of pages in the `BookList` header.
 - Display the minimum and maximum price of the books in the `BookList` header
+
+## 6 - Display a money bag emoji next to free books
+
+- Display the money bag emoji `&#x1F4B0;` right after the title of books that cost `$0.00`.
+- Add an `underline` text decoration aswell to all free books. You can either use `className` or a `style` binding
+
+### Hints
+
+```tsx
+{
+  isFree && <span> &#x1F4B0;</span>;
+}
+```
+
+```tsx
+<h2 style={{ textDecoration: isFree ? "underline" : "none" }}></h2>
+```
+
+### Bonus
+
+- Display an emoji of your choice next to books that are particularaly long (> 500 pages)
+- Display one to three dollar signs next to books depending on their price, e.g. $0 - $10, $10 - $30, $30 - $999
