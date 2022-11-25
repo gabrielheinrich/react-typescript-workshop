@@ -1,13 +1,15 @@
 import React from "react";
 import "./App.css";
 import { AppHeader } from "./components/AppHeader";
-import { ExampleBook } from "./components/ExampleBook";
+import { BookListItem } from "./components/BookListItem";
+import { exampleBooks } from "./domain/book";
 
 function App() {
   return (
     <div className="App">
       <AppHeader />
-      <ExampleBook />
+      <BookListItem book={exampleBooks[0]} />
+      <BookListItem book={exampleBooks[1]} />
     </div>
   );
 }
