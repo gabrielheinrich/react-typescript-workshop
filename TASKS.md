@@ -448,3 +448,46 @@ const context = useContext(MyContext);
 - Set the border and text color of the `<button>` in `Hideable` and the `LikeCounter`
 - Create a new custom hook `usePrimaryColor` which returns the primaryColor from the `ThemeContext`
 - Extract a `BaseButton` component, which is styled using the primary theme color. Use this `BaseButton` to replace the `<button>` html tag in both the `Hideable` component and the `LikeCounter`.
+
+## 12 - Create a ThemeEditor component
+
+- Wrap the return of `App.tsx` in a `ThemeContext.Provider`. Create a local primaryColor state with `useState` and use both the value and the setter to construct the theme value for the `ThemeContext.Provider`. Set the default primaryColor to 'tomato' and check if the styling has changed.
+
+  ```tsx
+  const [primaryColor, setPrimaryColor] = useState("tomato");
+
+  return (
+    <ThemeContext.Provider value={{ primaryColor, setPrimaryColor }}>
+      <div className="App">
+        <>...</>
+      </div>
+    </ThemeContext.Provider>
+  );
+  ```
+
+- Create and display a `ThemeEditor` component, which has two buttons to set the primary color to either 'steelblue' or 'tomato'.
+
+### Hints
+
+```tsx
+<button onClick={() => theme.setPrimaryColor("tomato")}>tomato</button>
+```
+
+### Bonus
+
+- Use this array of color choices to generate an array of buttons in the `ThemeEditor`. Styling tip: Set the button's background color, remove any border and set both width and height to 30px.
+
+```ts
+const colorChoices = [
+  "crimson",
+  "tomato",
+  "chocolate",
+  "darkorange",
+  "olivedrab",
+  "teal",
+  "dodgerblue",
+  "steelblue",
+];
+```
+
+- Try overwriting the Theme in the `BookList` component with a nested ThemeContext.Provider
