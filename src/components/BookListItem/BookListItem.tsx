@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Book } from "../../domain/book";
 import { LikeCounter } from "../LikeCounter";
+import { Hideable } from "../Hideable";
 
 export interface BookListItemProps {
   book: Book;
@@ -22,6 +23,7 @@ export const BookListItem = ({ book }: BookListItemProps) => {
       <div>
         <LikeCounter count={numLikes} setCount={setNumLikes} />
       </div>
+      <Hideable hideInitially>{book.abstract}</Hideable>
     </div>
   );
 };

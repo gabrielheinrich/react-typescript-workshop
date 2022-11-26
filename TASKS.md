@@ -310,3 +310,53 @@ const [numLikes, setNumLikes] = useState(0);
 - Extract the like counter into a separate `LikeCounter` component. Pass both the current count as well as a callback function to set the count as props.
 - Add another button for dislike. Only show the star when there's a +5 positive balance towards likes
 - If the num Likes is 0, don't display that number
+
+## 8 - Display the book's abstract, but make it hideable
+
+- Display the book's abstract in the `BookListItem` component.
+- Add a button to toggle if the abstract is being shown or hidden. The button text should be `+` or `-` depending on the state
+- Create a new `Hideable` component, which encapsulates this behaviour. The `Hideable` component should render the children elements passed to it and a button to show/hide them.
+- Use the `Hideable` component in `BookListItem`.
+
+### Hints
+
+```tsx
+<Hideable>{book.abstract}</Hideable>
+```
+
+```tsx
+import { ReactNode } from "react";
+
+export interface MyComponentProps {
+  children: ReactNode;
+}
+```
+
+```tsx
+{
+  shouldShowChildren && children;
+}
+```
+
+Hint for fade in animation bonus task:
+
+```css
+.fade-in {
+  animation: fade-in 1s;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100;
+  }
+}
+```
+
+### Bonus
+
+- Add a prop to `Hideable` to set the initial state to either hidden or visible.
+- Add an optional prop to set a maximum height for the contents of `Hideable` and make sure a scrollbar is shown when this height limit is reached.
+- Add an animation that fades in the content when it's being shown.
