@@ -1,13 +1,11 @@
 import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import "./App.css";
 import { AppHeader } from "./components/AppHeader";
-import { BookList } from "./components/BookList";
 import { ThemeEditor } from "./components/ThemeEditor";
-import { useBooks } from "./domain/book";
 import { ThemeContext, Theme } from "./domain/theme";
 
 function App() {
-  const { books } = useBooks();
   const [primaryColor, setPrimaryColor] = useState("tomato");
   const theme: Theme = {
     primaryColor,
@@ -19,7 +17,7 @@ function App() {
       <div className="App">
         <ThemeEditor />
         <AppHeader />
-        <BookList books={books} />
+        <Outlet />
       </div>
     </ThemeContext.Provider>
   );
