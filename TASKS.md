@@ -360,3 +360,45 @@ Hint for fade in animation bonus task:
 - Add a prop to `Hideable` to set the initial state to either hidden or visible.
 - Add an optional prop to set a maximum height for the contents of `Hideable` and make sure a scrollbar is shown when this height limit is reached.
 - Add an animation that fades in the content when it's being shown.
+
+## 9 - Fetch and display books from the Bookmonkey Api
+
+- Start the bookmonkey-api server in a separate terminal. Visit [http://localhost:4730/books] to verify.
+  ```bash
+  npx bookmonkey-api
+  ```
+- Create a new `async` function called `fetchBooks` in `src/domain/book/api.ts` which sends a get request to [http://localhost:4730/books], parses the response body as json and returns an array of books. Don't forget to re-export `./api` from `index.ts`
+- In `App.tsx`, instead of displaying the exampleBooks, start out with an empty books array and initiate fetching the books on the first render.
+
+### Hints
+
+```ts
+async () => {
+  const response = await fetch(url);
+  const data = await response.json();
+  return data as MyType;
+};
+```
+
+```ts
+const [books, setBooks] = useState<Book[]>([]);
+```
+
+Workaround, because react prohibits the useEffect handler to be async
+
+```ts
+useEffect(() => {
+  async function fetchData() {
+    // Use await here...
+    const data = await fetchSomething();
+    // ...
+  }
+  fetchData(); // initiate async operation, but don't wait
+});
+```
+
+### Bonus
+
+- Show the text 'Loading...' while waiting for a response from the server. You'll probably have to artifically throttle the network speed in the browser's devtools to notice.
+- Show an error message, if the server is not reachable or returns an error status code
+- Make the `BOOKMONKEY_API_URL` an environment variable. [Create-React-App Documentation: Adding custom environment variables](https://create-react-app.dev/docs/adding-custom-environment-variables/)
