@@ -288,3 +288,25 @@ export const BookListItem = ({ book }: BookListItemProps) => {
 
 - Display an emoji of your choice next to books that are particularaly long (> 500 pages)
 - Display one to three dollar signs next to books depending on their price, e.g. $0 - $10, $10 - $30, $30 - $999
+
+## 7 - Add a like counter to the BookListItem component
+
+- Add a `<button>` element to the BookListItem component that shows a clapping hands emoji (`&#128079;`)
+- Keep track how many times the button was clicked and display that number next to the emoji.
+- If the button was clicked 5 or more times show a star emoji (`&#11088;`) in front of the book title.
+
+### Hints
+
+```tsx
+const [numLikes, setNumLikes] = useState(0);
+```
+
+```tsx
+<button onClick={() => setNumLikes(numLikes + 1)}>&#128079;</button>
+```
+
+### Bonus
+
+- Extract the like counter into a separate `LikeCounter` component. Pass both the current count as well as a callback function to set the count as props.
+- Add another button for dislike. Only show the star when there's a +5 positive balance towards likes
+- If the num Likes is 0, don't display that number
