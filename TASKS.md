@@ -606,3 +606,55 @@ const colorChoices = [
   ```
 
 - Try out adding a prop to the `AboutScreen` or the `BooksScreen` and providing its value in the router definition.
+
+## 15 - Add navigation links to the Books and About Screen
+
+- In the `AppHeader` add a `NavLink` to the Books and to the About page
+- Underline only the currently active link.  
+  Tip: the generated `<a>` element automatically receives an `active` class, when the link is active
+
+### Hints
+
+```tsx
+<NavLink to="/about">About</NavLink>
+```
+
+```tsx
+import "./AppHeader.css";
+```
+
+```css
+a {
+  text-decoration: none;
+}
+
+a.active {
+  text-decoration: underline;
+}
+```
+
+### Bonus
+
+- Tip: Add `body { overflow-y: scroll; }` in `index.css` to prevent page width jumps when switching routes.
+- Render the `NavLinks` from a `links` array using `.map`:
+
+```ts
+const links = [
+  {path: "", text: "Books"}
+  {path: "/about", text: "About"}
+]
+```
+
+- Use the primary color from the ThemeContext to additionally highlight the currently active link. Tip: The `NavLink` component's style prop can be a function that receives the `isActive` state as an argument
+
+  ```tsx
+  <NavLink
+    style={({ isActive }) => {
+      return {};
+    }}
+  >
+    Books
+  </NavLink>
+  ```
+
+- Make the `AppHeader` sticky, so it stays visible when scrolling down the page
