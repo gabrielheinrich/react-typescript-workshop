@@ -417,3 +417,34 @@ useEffect(() => {
 - Let `useBooks` also return a boolean `loading`, that's true while waiting for the server response.
 - Also return an optional `error` object next to `loading` and the books. If there's an error, display the error message
 - Add a `refresh` function in the `useBooks` hook and return it as well. Call it every 30 seconds, but make sure to stop this, when the component is being destroyed.
+
+## 11 - Add a ThemeContext to provide a primary color
+
+- Create a new subdirectory for the theme `src/domain/theme` with its own `index.ts` file.
+- Create this interface for the Theme in `src/domain/theme/Theme.ts` and add it to the `index.ts` exports:
+  ```ts
+  export interface Theme {
+    primaryColor: string;
+    setPrimaryColor: (color: string) => void;
+  }
+  ```
+- In a new file `src/domain/theme/ThemeContext.ts` create a `ThemeContext` that provides a `Theme` object. For the default value, assign `primaryColor` to blue and `setPrimaryColor` to a function that does nothing (so called _noop_). Add the necessary exports.
+- Use the theme context in the `AppHeader` component and set the text color of the 'Bookmonkey' heading to to the primary color
+
+### Hints
+
+```tsx
+export const MyContext = createContext<MyType>(defaultValue);
+```
+
+```tsx
+import { MyContext } from "...";
+
+const context = useContext(MyContext);
+```
+
+### Bonus
+
+- Set the border and text color of the `<button>` in `Hideable` and the `LikeCounter`
+- Create a new custom hook `usePrimaryColor` which returns the primaryColor from the `ThemeContext`
+- Extract a `BaseButton` component, which is styled using the primary theme color. Use this `BaseButton` to replace the `<button>` html tag in both the `Hideable` component and the `LikeCounter`.
