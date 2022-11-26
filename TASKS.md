@@ -402,3 +402,18 @@ useEffect(() => {
 - Show the text 'Loading...' while waiting for a response from the server. You'll probably have to artifically throttle the network speed in the browser's devtools to notice.
 - Show an error message, if the server is not reachable or returns an error status code
 - Make the `BOOKMONKEY_API_URL` an environment variable. [Create-React-App Documentation: Adding custom environment variables](https://create-react-app.dev/docs/adding-custom-environment-variables/)
+
+## 10 - Create a custom useBooks hook
+
+- Create a new custom hook function called `useBooks` in `src/domain/book/hooks`
+- `useBooks` should automatically initiate fetching books on first render and return the currently available books. (An empty array until the server response was loaded)
+  Hint: You can copy paste almost all of this from `App.tsx`
+- Replace the book fetching logic in `App.tsx` by using the `useBooks` hook.
+
+### Hints
+
+### Bonus
+
+- Let `useBooks` also return a boolean `loading`, that's true while waiting for the server response.
+- Also return an optional `error` object next to `loading` and the books. If there's an error, display the error message
+- Add a `refresh` function in the `useBooks` hook and return it as well. Call it every 30 seconds, but make sure to stop this, when the component is being destroyed.
