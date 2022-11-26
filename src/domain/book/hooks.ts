@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Book } from "./Book";
-import { fetchBooks } from "./api";
+import { fetchBooks, fetchBook } from "./api";
 
 export const useBooks = () => {
   const [books, setBooks] = useState<Book[]>([]);
@@ -17,5 +17,17 @@ export const useBooks = () => {
 
   return {
     books,
+  };
+};
+
+export const useBook = (isbn: string) => {
+  const [book, setBook] = useState<Book>();
+  useEffect(() => {
+    setBook(undefined);
+    fetchBook(isbn).then(setBook);
+  }, [isbn]);
+
+  return {
+    book,
   };
 };

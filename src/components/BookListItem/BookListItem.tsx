@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { Book } from "../../domain/book";
 import { LikeCounter } from "../LikeCounter";
 import { Hideable } from "../Hideable";
@@ -13,11 +14,13 @@ export const BookListItem = ({ book }: BookListItemProps) => {
 
   return (
     <div>
-      <h2 style={{ textDecoration: isFree ? "underline" : "none" }}>
-        {numLikes >= 5 && <span> &#11088; </span>}
-        {book.title}
-        {isFree && <span> &#x1F4B0;</span>}
-      </h2>
+      <NavLink to={`/books/${book.isbn}`}>
+        <h2 style={{ textDecoration: isFree ? "underline" : "none" }}>
+          {numLikes >= 5 && <span> &#11088; </span>}
+          {book.title}
+          {isFree && <span> &#x1F4B0;</span>}
+        </h2>
+      </NavLink>
       <h3>{book.subtitle}</h3>
       <div>by {book.author}</div>
       <div>
