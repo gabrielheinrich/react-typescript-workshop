@@ -763,3 +763,27 @@ useEffect(() => {
   }
 }, [book]);
 ```
+
+## 19 Add form validation
+
+- Instead of logging the title, add an `alert(title)`, so it becomes more visible.
+- Turn off any built-in html validation and display an error message, when the title is shorter than 5 characters.
+- While there are any validation errors make sure the alert doesn't show.
+
+### Hints
+
+```tsx
+const titleError =
+  title.length < 5 ? "The title must be at least 5 characters long" : "";
+
+{
+  titleError && <p>{titleError}</p>;
+}
+```
+
+### Bonus
+
+- Disable the `Save` button with the `disabled` html attribute while there are validation errors.
+- Add a red border around the input field if there's a validation error
+- Make sure error messages are only being displayed after the user has left the input field for the first time, but then disappear immediately on the next input event that fixes the error.
+- Add some CSS to make the form layout less hideous.
