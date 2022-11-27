@@ -711,3 +711,29 @@ a {
   ```tsx
   const book = useLoaderData() as Book;
   ```
+
+## 17 Add a BookEditScreen with a simple uncontrolled form
+
+- Create a new screen component `BookEditScreen` and connect it to the route `/books/:isbn/edit'. Add an 'Edit' button to the `BookDetailScreen` that links to the edit screen.
+- Add a `<form>` element and a label and input field for the title, as well as a 'Save' button that triggers a submit event on the form.
+- When the submit event is triggered, `console.log` the title the user inserted. Use the `useRef` hook to get access to the input element.
+
+### Hints
+
+```tsx
+const titleInputRef = useRef<HTMLInputElement>()
+
+<input ref={titleInputRef} id="title" />
+```
+
+```tsx
+const onSubmit = (event: FormEvent) => {
+  event.preventDefault();
+  const inputElement: HTMLInputElement = titleInputRef.current!;
+};
+```
+
+### Bonus
+
+- Add a 'Cancel' button that brings the user back to the book detail screen.
+- Use the browser html validation to set the title to be both required and at least 5 characters long.
