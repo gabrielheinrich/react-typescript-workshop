@@ -1,12 +1,14 @@
 import { useState, useEffect, FormEvent, ChangeEvent } from "react";
-import { useParams } from "react-router-dom";
-import { useBook } from "../../domain/book";
+import { useParams, useNavigate } from "react-router-dom";
+import { useBook, updateBook } from "../../domain/book";
 
 export type BookEditScreenRouteParams = {
   isbn: string;
 };
 
 export const BookEditScreen = () => {
+  const navigate = useNavigate();
+
   const [title, setTitle] = useState("");
 
   const { isbn } = useParams<BookEditScreenRouteParams>();
@@ -22,14 +24,18 @@ export const BookEditScreen = () => {
     title.length < 5 ? "The title must be at least 5 characters long" : "";
   const [titleWasTouched, setTitleWasTouched] = useState(false);
 
-  const onSubmit = (event: FormEvent) => {
+  const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    if (titleError) {
+    if (titleError || !book) {
       return;
     }
 
-    alert(title);
+    await updateBook({
+      ...book,
+      title,
+    });
+    navigate(`/books/${book.isbn}`);
   };
 
   return (

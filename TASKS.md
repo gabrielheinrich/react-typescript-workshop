@@ -787,3 +787,35 @@ const titleError =
 - Add a red border around the input field if there's a validation error
 - Make sure error messages are only being displayed after the user has left the input field for the first time, but then disappear immediately on the next input event that fixes the error.
 - Add some CSS to make the form layout less hideous.
+
+## 20 Save the changes to the edited book
+
+- In `/src/domain/book/api` implement a new `updateBook` method, which sends a `PUT` request to the api. Don't forget to send the book as JSON and to set the header `Content-Type: application/json`.
+- Call the `updateBook` function when the form is being submitted.
+
+### Hints
+
+```ts
+const response = await fetch("http://localhost:4730/books/" + book.isbn, {
+  method: "PUT",
+  body: JSON.stringify(book),
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+```
+
+```ts
+await updateBook({
+  ...book,
+  title,
+});
+```
+
+### Bonus
+
+- When the book is successfully saved, route the user back to the `BookDetailScreen`, using the `useNavigate` hook from `react-router-dom`.
+- Add the ability to also edit the subtitle, author and numPages. Try to think of ways to structure your code so it doesn't bloat.
+- Add the ability to edit the price. Make sure that the format `$99.99` is ensured
+- Disable the save button, if there's nothing to be saved.
+- Instead of overwriting the entire book, with a `PUT` HTTP request, use `PATCH`. Tip: You can use the typescript utility type `Partial<T>` to get a type in which all fields of `T` are optional. What are the benefits/drawbacks of using `PATCH` vs. `PUT`?
