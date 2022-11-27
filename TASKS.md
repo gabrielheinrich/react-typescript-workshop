@@ -737,3 +737,29 @@ const onSubmit = (event: FormEvent) => {
 
 - Add a 'Cancel' button that brings the user back to the book detail screen.
 - Use the browser html validation to set the title to be both required and at least 5 characters long.
+
+## 18 Refactor the edit form into a controlled form and prefill it with data from the api
+
+- Keep constant track of the text inserted into the title input, by creating a new state with `useState` and adding an `onInput` event listener. Test the behaviour by temporarily displaying the contents of your state variable next to the input. Remove the `useRef` and adjust the `onSubmit` handler accordingly.
+- In the `BookEditScreen` automatically fetch the book to be edited from the api and prefill the content of the input field.
+
+### Hints
+
+```tsx
+const [title, setTitle] = useState("");
+
+<input
+  value={title}
+  onChange={(event: ChangeEvent<HTMLInputElement>) =>
+    setTitle(event.target.value)
+  }
+/>;
+```
+
+```tsx
+useEffect(() => {
+  if (book) {
+    setTitle(book.title);
+  }
+}, [book]);
+```

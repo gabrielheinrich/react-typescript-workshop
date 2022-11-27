@@ -1,18 +1,41 @@
-import { useRef, FormEvent } from "react";
+import { useState, useEffect, FormEvent, ChangeEvent } from "react";
+import { useParams } from "react-router-dom";
+import { useBook } from "../../domain/book";
+
+export type BookEditScreenRouteParams = {
+  isbn: string;
+};
 
 export const BookEditScreen = () => {
-  const titleInputRef = useRef<HTMLInputElement>(null);
+  const [title, setTitle] = useState("");
+
+  const { isbn } = useParams<BookEditScreenRouteParams>();
+  const { book } = useBook(isbn!);
+
+  useEffect(() => {
+    if (book) {
+      setTitle(book.title);
+    }
+  }, [book]);
 
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    console.log(titleInputRef.current!.value);
+    console.log(title);
   };
 
   return (
     <form onSubmit={onSubmit}>
       <label htmlFor="title">Title:</label>
-      <input ref={titleInputRef} type="text" id="title" name="title"></input>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        value={title}
+        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+          setTitle(event.target.value)
+        }
+      ></input>
 
       <button type="submit">Save</button>
     </form>
